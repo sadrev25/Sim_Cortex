@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pkl
+MUJOCO_LOG.TXT
+*.pt
+*.bin
+.venv/
