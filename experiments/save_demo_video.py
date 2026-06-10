@@ -152,7 +152,7 @@ def main():
     os.makedirs('/home/itm/msadasivam/simcortex/demo_frames', exist_ok=True)
 
     for episode_step in range(15):
-        frame = obs['agentview_image']
+        frame = obs['agentview_image'][::-1].copy()
         frame_buffer.append(frame)
         # save every frame for video
         all_frames.append(frame.copy())
@@ -181,7 +181,7 @@ def main():
             obs, reward, done, _ = env.step(mujoco_action)
             step_count += 1
 
-            frame = obs['agentview_image']
+            frame = obs['agentview_image'][::-1].copy()
             all_frames.append(frame.copy())
             imageio.imwrite(
                 f'/home/itm/msadasivam/simcortex/demo_frames/frame_{len(all_frames):04d}.png',

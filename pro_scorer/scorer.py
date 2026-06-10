@@ -1,13 +1,13 @@
 import torch
 import torch.nn as nn
 import sys
-sys.path.insert(0, '/home/mukesh/simcortex')
+sys.path.insert(0, '/home/itm/msadasivam/simcortex')
 from pro_scorer.progress_head import ProgressHead
 from pro_scorer.risk_head import RiskHead
 from pro_scorer.efficiency_head import EfficiencyHead
 
 class PROScorer(nn.Module):
-    def __init__(self, latent_dim=384, lambda_risk=0.5, beta_efficiency=0.3):
+    def __init__(self, latent_dim=2048, lambda_risk=0.5, beta_efficiency=0.3):
         super().__init__()
         self.progress_head   = ProgressHead(latent_dim)
         self.risk_head       = RiskHead(latent_dim)
@@ -46,9 +46,9 @@ class PROScorer(nn.Module):
 if __name__ == '__main__':
     print("Testing PRO Scorer...")
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    scorer = PROScorer(latent_dim=384).to(device)
+    scorer = PROScorer(latent_dim=2048).to(device)
     K = 3
-    fake_latents = [torch.randn(384).to(device) for _ in range(K)]
+    fake_latents = [torch.randn(2048).to(device) for _ in range(K)]
     result = scorer.score_candidates(fake_latents)
     print(f"K={K} candidates scored!")
     print(f"All scores: {[f'{s:.4f}' for s in result['all_scores']]}")
